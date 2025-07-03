@@ -1,0 +1,37 @@
+[tool.poetry]
+name = "svg-viewer"
+version = "0.1.0"
+description = "A simple SVG viewer application"
+authors = ["Your Name <your.email@example.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "viewer.py"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+pywebview = "^5.4.0"
+
+[tool.poetry.group.dev.dependencies]
+black = "^24.4.0"
+isort = "^5.13.2"
+mypy = "^1.9.0"
+flake8 = ">=6.1.0,<7.1.0"
+pytest = "^8.1.1"
+
+[build-system]
+requires = ["poetry-core>=2.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 88
+target-version = ['py38']
+include = '\.pyi?$'
+
+[tool.isort]
+profile = "black"
+line_length = 88
+multi_line_output = 3
+include_trailing_comma = true
+
+[tool.poetry.scripts]
+svg-viewer = "viewer:main"

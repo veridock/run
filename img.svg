@@ -1,0 +1,25 @@
+<svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+  <script type="text/ecmascript"><![CDATA[
+    function runPython() {
+      var code = document.getElementById('pyCode').textContent;
+      window.pywebview.api.execute_script(code).then(function(response) {
+        alert(response);
+      });
+    }
+  ]]></script>
+
+  <rect x="50" y="50" width="100" height="50" fill="blue" onclick="runPython()">
+    <text x="55" y="80" font-size="14">Click me</text>
+  </rect>
+
+  <script type="application/python" id="pyCode"><![CDATA[
+print("Python script executed!")
+import math
+radius = math.randint(10, 50)
+circle = document.getElementById("dynamicCircle")
+if circle:
+    circle.setAttribute("r", str(radius))
+  ]]></script>
+
+  <circle id="dynamicCircle" cx="200" cy="150" r="30" fill="red"/>
+</svg>
