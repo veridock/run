@@ -1,25 +1,60 @@
 [tool.poetry]
 name = "svg-viewer"
 version = "0.1.0"
-description = "A simple SVG viewer application"
-authors = ["Your Name <your.email@example.com>"]
-license = "MIT"
+description = "A simple SVG viewer with Python scripting support"
+long-description = "README.md"
+authors = ["Tom Sapletta <info@softreck.dev>"]
+license = "Apache-2.0"
 readme = "README.md"
-packages = [{include = "viewer.py"}]
+packages = [{include = "svg_viewer"}]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: OS Independent",
+    "Topic :: Multimedia :: Graphics :: Viewers",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "pytest-mock>=3.10.0",
+    "black>=22.0.0",
+    "isort>=5.0.0",
+    "flake8>=5.0.0",
+    "mypy>=1.0.0",
+    "pre-commit>=2.20.0",
+    "sphinx>=6.0.0",
+    "sphinx-rtd-theme>=1.2.0",
+]
 
 [tool.poetry.dependencies]
 python = "^3.9"
-pywebview = "^5.4.0"
+pywebview = "^4.0.0"
+PyQt5 = "^5.15.0"
+PyQtWebEngine = "^5.15.0"
+qtpy = "^2.0.0"
 
 [tool.poetry.group.dev.dependencies]
-black = "^24.4.0"
-isort = "^5.13.2"
-mypy = "^1.9.0"
-flake8 = ">=6.1.0,<7.1.0"
-pytest = "^8.1.1"
+pytest = "^7.0.0"
+pytest-cov = "^4.0.0"
+pytest-mock = "^3.10.0"
+black = "^22.0.0"
+isort = "^5.0.0"
+flake8 = "^5.0.0"
+mypy = "^1.0.0"
+pre-commit = "^2.20.0"
+sphinx = { version = "^6.0.0", optional = true }
+sphinx-rtd-theme = { version = "^1.2.0", optional = true }
 
 [build-system]
-requires = ["poetry-core>=2.0.0"]
+requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.black]
@@ -34,4 +69,4 @@ multi_line_output = 3
 include_trailing_comma = true
 
 [tool.poetry.scripts]
-svg-viewer = "viewer:main"
+run = "viewer:main"

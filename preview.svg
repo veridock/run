@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Embedded Python Script -->
+  <script type="application/python" id="pyCode"><![CDATA[
+import math
+# Generate random radius between 10 and 50
+radius = math.randint(10, 50)
+# Create result dictionary for JS communication
+result = {"radius": radius, "area": math.pi * radius**2}
+  ]]></script>
+
+  <!-- JavaScript Interface -->
+  <script type="text/ecmascript"><![CDATA[
+    function executePython() {
+      // Get Python code from SVG
+      var code = document.getElementById('pyCode').textContent;
+
+      // Execute Python through pywebview API
+      window.pywebview.api.execute_script(code).then(function(response) {
+        try {
+          // Parse Python response
+          var result = JSON.parse(response);
+
+          // Update SVG elements
+          var circle = document.getElementById("dynamicCircle");
+          circle.setAttribute("r", result.radius);
+
+          // Show result to user
+          alert("Python executed!\nRadius: " + result.radius +
+                "\nArea: " + result.area.toFixed(2));
+        } catch (e) {
+          alert("Execution Error: " + response);
+        }
+      });
+    }
+  ]]></script>
+
+  <!-- Interactive UI Elements -->
+  <rect x="50" y="50" width="120" height="40" fill="#4CAF50"
+        onclick="executePython()" style="cursor:pointer">
+    <text x="60" y="75" font-size="14" fill="white">Run Python</text>
+  </rect>
+
+  <circle id="dynamicCircle" cx="200" cy="150" r="30" fill="#f44336"/>
+
+  <!-- Status Text -->
+  <text x="10" y="290" font-size="12" fill="#666">
+    Click the button to execute embedded Python code
+  </text>
+</svg>
